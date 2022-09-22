@@ -1,0 +1,19 @@
+.inputField {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.formInput {
+    width: 150px;
+    height: 30px;
+    padding: 20px 20px;
+    border-radius: 5px;
+    margin-right: 2rem;
+}
+
+.playerNumber {
+    font-size: 1.2rem;
+    line-height: 2.5;
+    margin-right: 10px;
+}
