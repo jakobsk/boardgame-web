@@ -1,12 +1,12 @@
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import styles from "../styles/Layout.module.css";
-import utilStyles from "../styles/Utils.module.css";
-import { ImageSizeAndPath } from "../types/image";
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from '../styles/Layout.module.css';
+import utilStyles from '../styles/Utils.module.css';
+import { ImageSizeAndPath } from '../types/image';
 
-export const siteTitle = "Den store brettspilltrackingen!";
-const title = "Brettspill rating";
+export const siteTitle = 'Den store brettspilltrackingen!';
+const title = 'Brettspill rating';
 
 export default function Layout({
   children,

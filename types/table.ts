@@ -1,4 +1,4 @@
-import { Trend } from "../constants/table";
+import { Trend } from '../constants/table';
 
 export interface RowData {
   name: string;
