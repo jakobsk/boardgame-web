@@ -2,8 +2,7 @@ import Table from 'react-bootstrap/Table';
 import { Column } from '../constants/table';
 import { RowData } from '../types/table';
 
-
-function RankingTable({rows} : {rows: RowData[]}) {
+function RankingTable({ rows }: { rows: RowData[] }) {
   return (
     <Table striped bordered hover>
       <thead>
@@ -18,17 +17,17 @@ function RankingTable({rows} : {rows: RowData[]}) {
         </tr>
       </thead>
       <tbody>
-      {rows.map((row, index) => (
-        <tr key={index}>
-          <td>{index + 1}</td>
-          <td>{row.name}</td>
-          <td>{row.rating}</td>
-          <td>{row.gamesPlayed}</td>
-          <td>{row.gamesWon}</td>
-          <td>{row.gamesLost}</td>
-          <td>{row.lastFiveGames}</td>
-        </tr>
-      ))}
+        {rows.map((row, index) => (
+          <tr key={index}>
+            <td>{index + 1}</td>
+            <td>{row.name}</td>
+            <td>{row.rating}</td>
+            <td>{row.gamesPlayed}</td>
+            <td>{row.gamesWon}</td>
+            <td>{row.gamesLost}</td>
+            <td>{row.lastFiveGames}</td>
+          </tr>
+        ))}
       </tbody>
     </Table>
   );
