@@ -53,7 +53,7 @@ function RankingForm({ toggleModal }: { toggleModal: noParamNoCallback }) {
           const elementRank = `rank${index}`;
           return (
             <>
-              <div key={index} className={styles.inputField}>
+              <div key={index} className={styles.center}>
                 <label htmlFor={elementName} className={styles.playerNumber}>
                   Spiller {index + 1}:
                 </label>
@@ -74,7 +74,7 @@ function RankingForm({ toggleModal }: { toggleModal: noParamNoCallback }) {
 
                 <hr></hr>
               </div>
-              <div className={styles.validationErrors}>
+              <div className={styles.center}>
                 {errors[elementName] && (
                   <span className={styles.error}>Navn mangler</span>
                 )}
@@ -85,19 +85,24 @@ function RankingForm({ toggleModal }: { toggleModal: noParamNoCallback }) {
             </>
           );
         })}
-        <Button variant="dark" type="submit">
-          Registrer
-        </Button>
+        <div className={styles.center}>
+          <Button variant="dark" className={styles.buttons} type="submit">
+            Registrer
+          </Button>
+          <Button variant="dark" className={styles.buttons} onClick={addPlayer}>
+            {' '}
+            Legg til spiller
+          </Button>
+          <Button
+            variant="dark"
+            className={styles.buttons}
+            onClick={removePlayer}
+          >
+            {' '}
+            Fjern spiller
+          </Button>
+        </div>
       </form>
-
-      <Button variant="dark" onClick={addPlayer}>
-        {' '}
-        Legg til spiller
-      </Button>
-      <Button variant="dark" onClick={removePlayer}>
-        {' '}
-        Fjern spiller
-      </Button>
       {showErrorMessage && (
         <div>Kan ikke legge til mer enn {maxPlayers} spillere</div>
       )}

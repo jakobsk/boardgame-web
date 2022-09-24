@@ -1,7 +1,7 @@
-.inputField {
+.center {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .formInput {
@@ -18,10 +18,8 @@
   margin-right: 10px;
 }
 
-.validationErrors {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
+.buttons {
+  margin: 10px auto;
 }
 
 .error {
