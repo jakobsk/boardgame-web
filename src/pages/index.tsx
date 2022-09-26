@@ -30,9 +30,9 @@ const Home: NextPage = () => {
               <h2>Terraforming Mars</h2>
             </a>
           </Link>
-          <Link href="/terraforming">
+          <Link href="/poker">
             <a className={homeStyles.card}>
-              <h2>Et annet spill</h2>
+              <h2>Poker</h2>
             </a>
           </Link>
           <Link href="/terraforming">

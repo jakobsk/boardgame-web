@@ -2,54 +2,46 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Layout from '../../components/layout';
 import utilStyles from '../../styles/Utils.module.css';
-import RegisterModal from '../../components/terraform/register-game-modal';
-import RankingTable from '../../components/terraform/ranking-table';
-import { RowDataTerraform } from '../../types/table';
+import RegisterModal from '../../components/poker/register-game-modal';
+import RankingTable from '../../components/poker/ranking-table';
+import { RowDataPoker } from '../../types/table';
 import { Trend } from '../../constants/table';
 
 // TODO: foldername should be changed to games and the specific game
 // should be dynamically routed
 const Terraform: NextPage = () => {
   const imageDto = {
-    path: '/images/terraform.png',
+    path: '/images/poker.png',
     height: 427,
     width: 614,
   };
 
   // TODO: this should be fetched from the backend
 
-  const rowData: RowDataTerraform[] = [
+  const rowData: RowDataPoker[] = [
     {
       name: 'Jakob Stenersen Kok',
-      rating: 1500,
+      netProfit: 1500,
       gamesPlayed: 18,
-      gamesWon: 8,
-      gamesLost: 2,
       lastFiveGames: Trend.UP,
     },
     {
       name: 'Vebjørn Nordahl Stadsvoll',
-      rating: 1400,
+      netProfit: 1500,
       gamesPlayed: 18,
-      gamesWon: 8,
-      gamesLost: 2,
-      lastFiveGames: Trend.DOWN,
+      lastFiveGames: Trend.UP,
     },
     {
       name: 'Mathias Ackermann',
-      rating: 1300,
+      netProfit: 1500,
       gamesPlayed: 18,
-      gamesWon: 8,
-      gamesLost: 2,
       lastFiveGames: Trend.DOWN,
     },
     {
       name: 'Arvid Mildner',
-      rating: 1300,
+      netProfit: 1500,
       gamesPlayed: 18,
-      gamesWon: 8,
-      gamesLost: 2,
-      lastFiveGames: Trend.UP,
+      lastFiveGames: Trend.DOWN,
     },
   ];
 
@@ -57,7 +49,7 @@ const Terraform: NextPage = () => {
     <>
       <Layout imageSizeAndPath={imageDto}>
         <Head>
-          <title>Terraforming Mars</title>
+          <title>Poker</title>
         </Head>
 
         <RankingTable rows={rowData}></RankingTable>

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import styles from '../styles/RegisterForm.module.css';
+import styles from '../../styles/RegisterForm.module.css';
 import Button from 'react-bootstrap/Button';
-import { noParamNoCallback } from '../types/function-types';
+import { noParamNoCallback } from '../../types/function-types';
 
 //TODO: This number should be fetched from backend maybe since every game has different allowed players
 

@@ -1,19 +1,19 @@
 import Table from 'react-bootstrap/Table';
-import { Column } from '../constants/table';
-import { RowData } from '../types/table';
+import { ColumnTerraform } from '../../constants/table';
+import { RowDataTerraform } from '../../types/table';
 
-function RankingTable({ rows }: { rows: RowData[] }) {
+function RankingTable({ rows }: { rows: RowDataTerraform[] }) {
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
           <th>#</th>
-          <th>{Column.NAME}</th>
-          <th>{Column.RATING}</th>
-          <th>{Column.NUMB_MATCHES}</th>
-          <th>{Column.WON}</th>
-          <th>{Column.LOSSES}</th>
-          <th>{Column.LAST_FIVE}</th>
+          <th>{ColumnTerraform.NAME}</th>
+          <th>{ColumnTerraform.RATING}</th>
+          <th>{ColumnTerraform.NUMB_MATCHES}</th>
+          <th>{ColumnTerraform.WON}</th>
+          <th>{ColumnTerraform.LOSSES}</th>
+          <th>{ColumnTerraform.LAST_FIVE}</th>
         </tr>
       </thead>
       <tbody>
