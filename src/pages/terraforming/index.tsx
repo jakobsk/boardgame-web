@@ -6,6 +6,7 @@ import Modal from '../../components/register-game-modal';
 import RankingTable from '../../components/ranking-table';
 import { RowData } from '../../types/table';
 import { Trend } from '../../constants/table';
+import Chart from '../../components/chart';
 
 // TODO: foldername should be changed to games and the specific game
 // should be dynamically routed
@@ -65,6 +66,7 @@ const Terraform: NextPage = () => {
         <div className={utilStyles.centerContent}>
           <Modal></Modal>
         </div>
+        <Chart></Chart>
       </Layout>
     </>
   );

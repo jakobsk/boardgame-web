@@ -17,7 +17,9 @@
     "react": "18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.36.1"
+    "react-hook-form": "^7.36.1",
+    "victory-chart": "^36.6.8",
+    "victory-line": "^36.6.8"
   },
   "devDependencies": {
     "@types/node": "18.7.18",
