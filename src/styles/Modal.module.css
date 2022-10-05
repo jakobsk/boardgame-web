@@ -12,6 +12,14 @@
 .overlay {
   background: rgba(49, 49, 49, 0.8);
 }
+
+.registerGameButton {
+  position: absolute;
+  right: 2rem;
+  bottom: 10rem;
+  width: 25%;
+}
+
 .modalContent {
   position: absolute;
   top: 50%;

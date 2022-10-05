@@ -1,5 +1,5 @@
 import Table from 'react-bootstrap/Table';
-import { Column } from '../constants/table';
+import { Columns } from '../constants/table';
 import { RowData } from '../types/table';
 
 function RankingTable({ rows }: { rows: RowData[] }) {
@@ -8,12 +8,12 @@ function RankingTable({ rows }: { rows: RowData[] }) {
       <thead>
         <tr>
           <th>#</th>
-          <th>{Column.NAME}</th>
-          <th>{Column.RATING}</th>
-          <th>{Column.NUMB_MATCHES}</th>
-          <th>{Column.WON}</th>
-          <th>{Column.LOSSES}</th>
-          <th>{Column.LAST_FIVE}</th>
+          <th>{Columns.NAME}</th>
+          <th>{Columns.RATING}</th>
+          <th>{Columns.NUMB_MATCHES}</th>
+          <th>{Columns.WON}</th>
+          <th>{Columns.LOSSES}</th>
+          <th>{Columns.LAST_FIVE}</th>
         </tr>
       </thead>
       <tbody>

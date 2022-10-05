@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Layout from '../../components/layout';
-import utilStyles from '../../styles/Utils.module.css';
 import Modal from '../../components/register-game-modal';
-import RankingTable from '../../components/ranking-table';
+import RankingTable from '../../components/table';
 import { RowData } from '../../types/table';
 import { Trend } from '../../constants/table';
+import GameHistory from '../../components/game-history';
 
 // TODO: foldername should be changed to games and the specific game
 // should be dynamically routed
@@ -53,6 +53,88 @@ const Terraform: NextPage = () => {
     },
   ];
 
+  // TODO this needs to be fetched from backend
+  const gameHistory = [
+    {
+      date: '2021-10-01',
+      winner: 'Jakob',
+      playersRankings: [
+        {
+          name: 'Jakob',
+          ranking: 1,
+        },
+        {
+          name: 'Vebjørn',
+          ranking: 2,
+        },
+        {
+          name: 'Per',
+          ranking: 3,
+        },
+        {
+          name: 'Mahtias',
+          ranking: 4,
+        },
+        {
+          name: 'Arvid',
+          ranking: 5,
+        },
+      ],
+    },
+    {
+      date: '2021-10-02',
+      winner: 'Jakob',
+      playersRankings: [
+        {
+          name: 'Jakob',
+          ranking: 1,
+        },
+        {
+          name: 'Vebjørn',
+          ranking: 2,
+        },
+        {
+          name: 'Per',
+          ranking: 3,
+        },
+        {
+          name: 'Mahtias',
+          ranking: 4,
+        },
+        {
+          name: 'Arvid',
+          ranking: 5,
+        },
+      ],
+    },
+    {
+      date: '2021-10-03',
+      winner: 'Jakob',
+      playersRankings: [
+        {
+          name: 'Jakob',
+          ranking: 1,
+        },
+        {
+          name: 'Vebjørn',
+          ranking: 2,
+        },
+        {
+          name: 'Per',
+          ranking: 3,
+        },
+        {
+          name: 'Mahtias',
+          ranking: 4,
+        },
+        {
+          name: 'Arvid',
+          ranking: 5,
+        },
+      ],
+    },
+  ];
+
   return (
     <>
       <Layout imageSizeAndPath={imageDto}>
@@ -61,10 +143,8 @@ const Terraform: NextPage = () => {
         </Head>
 
         <RankingTable rows={rowData}></RankingTable>
-
-        <div className={utilStyles.centerContent}>
-          <Modal></Modal>
-        </div>
+        <Modal></Modal>
+        <GameHistory gameHistory={gameHistory}></GameHistory>
       </Layout>
     </>
   );

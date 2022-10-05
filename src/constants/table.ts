@@ -3,7 +3,7 @@ export enum Trend {
   DOWN = 'Synkende',
 }
 
-export enum Column {
+export enum Columns {
   NAME = 'Navn',
   RATING = 'Rating',
   NUMB_MATCHES = 'Antall matcher',

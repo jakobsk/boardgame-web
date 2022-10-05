@@ -20,10 +20,11 @@ export default function Modal() {
 
   return (
     <>
-      <Button variant="dark" onClick={toggleModal}>
-        Registrer spill
-      </Button>
-
+      <div className={styles.registerGameButton}>
+        <Button variant="dark" onClick={toggleModal}>
+          Registrer spill
+        </Button>
+      </div>
       {modal && (
         <div className={styles.modal}>
           <div onClick={toggleModal} className={styles.overlay}></div>

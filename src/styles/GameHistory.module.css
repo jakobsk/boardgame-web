@@ -1,0 +1,30 @@
+.heading {
+  margin-top: 10rem;
+}
+
+.showDetailsButton {
+  width: 100%;
+  background: transparent;
+  border: none;
+}
+
+.playerRankings {
+  margin: 0 10px;
+}
+
+.container {
+  margin: 3rem;
+}
+
+.gameSessionHeader {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.gameSessionHeaderWinner {
+  margin-left: 2rem;
+}
+
+.gameSessionHeaderDate {
+  margin-left: 2rem;
+}
