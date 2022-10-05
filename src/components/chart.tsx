@@ -1,13 +1,16 @@
 import { VictoryChart } from 'victory-chart';
 import { VictoryTheme } from 'victory-core';
 import { VictoryLine } from 'victory-line';
+import { VictoryLegend } from 'victory-legend';
 
 export default function Chart() {
+  const colorScale = ['#06c', '#f4c145', '#4cb140'];
+
   return (
     <VictoryChart theme={VictoryTheme.material} width={600} height={300}>
       <VictoryLine
         style={{
-          data: { stroke: '#c43a31' },
+          data: { stroke: colorScale[0] },
           parent: { border: '1px solid #ccc' },
         }}
         data={[
@@ -21,7 +24,7 @@ export default function Chart() {
 
       <VictoryLine
         style={{
-          data: { stroke: '#3151c4' },
+          data: { stroke: colorScale[1] },
           parent: { border: '1px solid #ccc' },
         }}
         data={[
@@ -31,6 +34,12 @@ export default function Chart() {
           { x: 4, y: 1300 },
           { x: 5, y: 1350 },
         ]}
+      />
+      <VictoryLegend
+        colorScale={colorScale}
+        data={[{ name: 'Mathias' }, { name: 'Jakob' }]}
+        orientation="horizontal"
+        name="legend"
       />
     </VictoryChart>
   );
