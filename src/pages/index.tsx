@@ -4,13 +4,16 @@ import utilStyles from '../styles/Utils.module.css';
 import homeStyles from '../styles/Home.module.css';
 import Layout, { siteTitle } from '../components/layout';
 import Link from 'next/link';
+import {getAllGames} from '../api/games';
+import { GetStaticProps } from 'next';
 
-const Home: NextPage = () => {
+const Home = ({games}) => {
   const imageDto = {
     path: '/images/frontpage_header.png',
     height: 313.5,
     width: 300,
   };
+
   return (
     <Layout home imageSizeAndPath={imageDto}>
       <Head>
@@ -25,30 +28,33 @@ const Home: NextPage = () => {
           <p>Fete features kommer snart.. stay tuned..</p>
         </section>
         <section className={homeStyles.grid}>
-          <Link href="/terraforming">
-            <a className={homeStyles.card}>
-              <h2>Terraforming Mars</h2>
-            </a>
-          </Link>
-          <Link href="/terraforming">
-            <a className={homeStyles.card}>
-              <h2>Et annet spill</h2>
-            </a>
-          </Link>
-          <Link href="/terraforming">
-            <a className={homeStyles.card}>
-              <h2>Et annet spill</h2>
-            </a>
-          </Link>
-          <Link href="/terraforming">
-            <a className={homeStyles.card}>
-              <h2>Et annet spill</h2>
-            </a>
-          </Link>
-        </section>
+          {games.map(({game, fullName }) => (
+            <Link href={`/games/${game}`} key={game}>
+              <a className={homeStyles.card}>
+                <h2>{fullName}</h2>
+                </a>
+            </Link>
+          ))}
+          </section>
+         
       </div>
+      <footer className={homeStyles.footer}> HELLO THERE </footer>
     </Layout>
   );
 };
+
+export const getStaticProps: GetStaticProps = async () => {
+  //TODO: should not be necessary
+
+
+  const allGames = await getAllGames();
+  const games = allGames.map(game => game.params);
+  return {
+    props: {
+      games,
+    },
+  };
+};
+
 
 export default Home;
