@@ -47,6 +47,7 @@ const Home: NextPage = () => {
           </Link>
         </section>
       </div>
+      <footer className={homeStyles.footer}> HELLO </footer>
     </Layout>
   );
 };

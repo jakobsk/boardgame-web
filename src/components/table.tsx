@@ -1,19 +1,20 @@
 import Table from 'react-bootstrap/Table';
-import { Columns } from '../constants/table';
+import { Columns_Terraforming, Columns_Poker } from '../constants/table';
 import { RowData } from '../types/table';
 
-function RankingTable({ rows }: { rows: RowData[] }) {
+function RankingTable({ game, rows }: { game: string; rows: RowData[] }) {
+  const Columns = getGameColumns(game);
+
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
           <th>#</th>
           <th>{Columns.NAME}</th>
-          <th>{Columns.RATING}</th>
+          <th>{Columns.TOATAL_SCORE}</th>
           <th>{Columns.NUMB_MATCHES}</th>
           <th>{Columns.WON}</th>
           <th>{Columns.LOSSES}</th>
-          <th>{Columns.LAST_FIVE}</th>
         </tr>
       </thead>
       <tbody>
@@ -21,11 +22,10 @@ function RankingTable({ rows }: { rows: RowData[] }) {
           <tr key={index}>
             <td>{index + 1}</td>
             <td>{row.name}</td>
-            <td>{row.rating}</td>
+            <td>{row.totalScore}</td>
             <td>{row.gamesPlayed}</td>
             <td>{row.gamesWon}</td>
             <td>{row.gamesLost}</td>
-            <td>{row.lastFiveGames}</td>
           </tr>
         ))}
       </tbody>
@@ -33,4 +33,14 @@ function RankingTable({ rows }: { rows: RowData[] }) {
   );
 }
 
+const getGameColumns = (game: string) => {
+  switch (game) {
+    case 'terraforming':
+      return Columns_Terraforming;
+    case 'poker':
+      return Columns_Poker;
+    default:
+      return Columns_Terraforming;
+  }
+};
 export default RankingTable;
