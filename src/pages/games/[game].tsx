@@ -7,8 +7,6 @@ import { getAllGames, getGameData } from '../../api/games';
 import { GetStaticProps, GetStaticPaths } from 'next';
 
 const Game = ({ gameData }) => {
-  console.log('yeyes', gameData);
-
   const imageDto = {
     path: `/images/${gameData.game}.png`,
     height: 427,

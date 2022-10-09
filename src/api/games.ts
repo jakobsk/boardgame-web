@@ -122,6 +122,8 @@ export async function getGameData(game) {
         ],
       };
 
+      break;
+
     case 'poker':
       gameData = {
         rowData: [
@@ -236,6 +238,8 @@ export async function getGameData(game) {
           },
         ],
       };
+
+      break;
   }
   return {
     game,
@@ -252,11 +256,13 @@ export async function getAllGames() {
     {
       params: {
         game: 'terraforming',
+        fullName: 'Terraforming Mars',
       },
     },
     {
       params: {
         game: 'poker',
+        fullName: 'Poker',
       },
     },
   ];
