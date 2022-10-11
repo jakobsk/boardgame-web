@@ -53,6 +53,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const gameTypesWithLinks = gameTypes.map((game) => {
     return { ...game, link: toCamelCase(game.name) };
   });
+  console.log('HALLA: ', gameTypesWithLinks);
   return {
     props: {
       gameTypesWithLinks,
