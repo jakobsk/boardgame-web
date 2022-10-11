@@ -4,7 +4,6 @@ import { BOARDGAME_API } from '../../constants/urls';
 import { GameType } from '../../models/game-type';
 
 export async function getGameData(game) {
-  console.log('HALLA: ', game);
   // const res = await fetch(`${BOARDGAME_API}/games/${game}`);
   // return res.json();
 
@@ -240,6 +239,8 @@ export async function getGameData(game) {
           },
         ],
       };
+
+      break;
   }
   return {
     game,

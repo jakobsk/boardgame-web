@@ -1,16 +1,23 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import utilStyles from '../styles/Utils.module.css';
 import homeStyles from '../styles/Home.module.css';
 import Layout, { siteTitle } from '../components/layout';
 import Link from 'next/link';
 
-const Home: NextPage = () => {
+import { GetStaticProps } from 'next';
+import { getAllGamesTypes } from './api/games';
+import { toCamelCase } from '../utils/string-utils';
+import { GameType } from '../models/game-type';
+
+type GameTypesWithLink = GameType & { link: string };
+
+const Home = ({ gameTypes }: { gameTypes: GameTypesWithLink[] }) => {
   const imageDto = {
     path: '/images/frontpage_header.png',
     height: 313.5,
     width: 300,
   };
+
   return (
     <Layout home imageSizeAndPath={imageDto}>
       <Head>
@@ -25,31 +32,32 @@ const Home: NextPage = () => {
           <p>Fete features kommer snart.. stay tuned..</p>
         </section>
         <section className={homeStyles.grid}>
-          <Link href="games/TerraformingMars">
-            <a className={homeStyles.card}>
-              <h2>Terraforming Mars</h2>
-            </a>
-          </Link>
-          <Link href="games/Poker">
-            <a className={homeStyles.card}>
-              <h2>Poker</h2>
-            </a>
-          </Link>
-          <Link href="games/TerraformingMars">
-            <a className={homeStyles.card}>
-              <h2>Et annet spill</h2>
-            </a>
-          </Link>
-          <Link href="games/TerraformingMars">
-            <a className={homeStyles.card}>
-              <h2>Et annet spill</h2>
-            </a>
-          </Link>
+          {gameTypes.map((game) => (
+            <Link href={`/games/${game.link}`} key={game.id}>
+              <a className={homeStyles.card}>
+                <h2>{game.name}</h2>
+              </a>
+            </Link>
+          ))}
         </section>
       </div>
-      <footer className={homeStyles.footer}> HELLO </footer>
+      <footer className={homeStyles.footer}> HELLO THERE </footer>
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  //TODO: should not be necessary
+
+  const gameTypes = await getAllGamesTypes();
+  const gameTypesWithLinks = gameTypes.map((game) => {
+    return { ...game, link: toCamelCase(game.name) };
+  });
+  return {
+    props: {
+      gameTypesWithLinks,
+    },
+  };
 };
 
 export default Home;
