@@ -25,22 +25,22 @@ const Home: NextPage = () => {
           <p>Fete features kommer snart.. stay tuned..</p>
         </section>
         <section className={homeStyles.grid}>
-          <Link href="/terraforming">
+          <Link href="games/TerraformingMars">
             <a className={homeStyles.card}>
               <h2>Terraforming Mars</h2>
             </a>
           </Link>
-          <Link href="/terraforming">
+          <Link href="games/Poker">
+            <a className={homeStyles.card}>
+              <h2>Poker</h2>
+            </a>
+          </Link>
+          <Link href="games/TerraformingMars">
             <a className={homeStyles.card}>
               <h2>Et annet spill</h2>
             </a>
           </Link>
-          <Link href="/terraforming">
-            <a className={homeStyles.card}>
-              <h2>Et annet spill</h2>
-            </a>
-          </Link>
-          <Link href="/terraforming">
+          <Link href="games/TerraformingMars">
             <a className={homeStyles.card}>
               <h2>Et annet spill</h2>
             </a>
