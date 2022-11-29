@@ -1,13 +1,16 @@
 //const API_URL = 'localhost:8080/api';
 
+import { BOARDGAME_API } from '../../constants/urls';
+import { GameType } from '../../models/game-type';
+
 export async function getGameData(game) {
-  //   const res = await fetch(`API_URL/games/${game}`);
-  //   const gameData = await res.json();
+  // const res = await fetch(`${BOARDGAME_API}/games/${game}`);
+  // return res.json();
 
   let gameData;
 
   switch (game) {
-    case 'terraforming':
+    case 'TerraformingMars':
       gameData = {
         rowData: [
           {
@@ -122,9 +125,7 @@ export async function getGameData(game) {
         ],
       };
 
-      break;
-
-    case 'poker':
+    case 'Poker':
       gameData = {
         rowData: [
           {
@@ -247,25 +248,7 @@ export async function getGameData(game) {
   };
 }
 
-export async function getAllGames() {
-  //   const res = await fetch(`API_URL/games`);
-  //   const games = await res.json();
-
-  // Return on this format
-  const games = [
-    {
-      params: {
-        game: 'terraforming',
-        fullName: 'Terraforming Mars',
-      },
-    },
-    {
-      params: {
-        game: 'poker',
-        fullName: 'Poker',
-      },
-    },
-  ];
-
-  return games;
+export async function getAllGamesTypes(): Promise<GameType[]> {
+  const res = await fetch(`${BOARDGAME_API}/games`);
+  return res.json();
 }

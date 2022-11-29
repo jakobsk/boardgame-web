@@ -1,13 +1,17 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import utilStyles from '../styles/Utils.module.css';
 import homeStyles from '../styles/Home.module.css';
 import Layout, { siteTitle } from '../components/layout';
 import Link from 'next/link';
-import {getAllGames} from '../api/games';
-import { GetStaticProps } from 'next';
 
-const Home = ({games}) => {
+import { GetStaticProps } from 'next';
+import { getAllGamesTypes } from './api/games';
+import { toCamelCase } from '../utils/string-utils';
+import { GameType } from '../models/game-type';
+
+type GameTypesWithLink = GameType & { link: string };
+
+const Home = ({ gameTypes }: { gameTypes: GameTypesWithLink[] }) => {
   const imageDto = {
     path: '/images/frontpage_header.png',
     height: 313.5,
@@ -28,15 +32,14 @@ const Home = ({games}) => {
           <p>Fete features kommer snart.. stay tuned..</p>
         </section>
         <section className={homeStyles.grid}>
-          {games.map(({game, fullName }) => (
-            <Link href={`/games/${game}`} key={game}>
+          {gameTypes.map((game) => (
+            <Link href={`/games/${game.link}`} key={game.id}>
               <a className={homeStyles.card}>
-                <h2>{fullName}</h2>
-                </a>
+                <h2>{game.name}</h2>
+              </a>
             </Link>
           ))}
-          </section>
-         
+        </section>
       </div>
       <footer className={homeStyles.footer}> HELLO THERE </footer>
     </Layout>
@@ -46,15 +49,16 @@ const Home = ({games}) => {
 export const getStaticProps: GetStaticProps = async () => {
   //TODO: should not be necessary
 
-
-  const allGames = await getAllGames();
-  const games = allGames.map(game => game.params);
+  const gameTypes = await getAllGamesTypes();
+  const gameTypesWithLinks = gameTypes.map((game) => {
+    return { ...game, link: toCamelCase(game.name) };
+  });
+  console.log('HALLA: ', gameTypesWithLinks);
   return {
     props: {
-      games,
+      gameTypesWithLinks,
     },
   };
 };
-
 
 export default Home;

@@ -3,10 +3,12 @@ import GameHistory from '../../components/game-history';
 import Layout from '../../components/layout';
 import Modal from '../../components/register-game-modal';
 import RankingTable from '../../components/table';
-import { getAllGames, getGameData } from '../../api/games';
+import { getAllGamesTypes, getGameData } from '../api/games';
 import { GetStaticProps, GetStaticPaths } from 'next';
+import { toCamelCase } from '../../utils/string-utils';
 
 const Game = ({ gameData }) => {
+  // FIX: loose link between game data and image, should retrieve perhaps from backend
   const imageDto = {
     path: `/images/${gameData.game}.png`,
     height: 427,
@@ -32,10 +34,7 @@ const Game = ({ gameData }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  //TODO: should not be necessary
-  const game = params?.game ? params.game : 'terraforming';
-
-  const gameData = await getGameData(game);
+  const gameData = await getGameData(params?.game);
   return {
     props: {
       gameData,
@@ -45,7 +44,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllGames();
+  const gameTypes = await getAllGamesTypes();
+
+  const paths = gameTypes.map((gameType) => {
+    return {
+      params: { game: toCamelCase(gameType.name) },
+    };
+  });
+
   return {
     paths,
     fallback: false,

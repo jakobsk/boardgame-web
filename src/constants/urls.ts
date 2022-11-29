@@ -1,0 +1,1 @@
+export const BOARDGAME_API = process.env.NEXT_PUBLIC_BOARDGAME_API_URL;
