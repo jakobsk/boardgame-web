@@ -3,7 +3,7 @@ import GameHistory from '../../components/game-history';
 import Layout from '../../components/layout';
 import Modal from '../../components/register-game-modal';
 import RankingTable from '../../components/table';
-import { getAllGames, getGameData } from '../../api/games';
+import { getAllGames, getGameData } from '../api/games';
 import { GetStaticProps, GetStaticPaths } from 'next';
 
 const Game = ({ gameData }) => {
@@ -32,7 +32,7 @@ const Game = ({ gameData }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  //TODO: should not be necessary
+  console.log('LAAA: ', params);
   const game = params?.game ? params.game : 'terraforming';
 
   const gameData = await getGameData(game);
