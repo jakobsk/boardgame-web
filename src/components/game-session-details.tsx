@@ -38,10 +38,10 @@ export default function GameSessionDetails({
             </div>
             {openDetails && (
               <div>
-                {gameSession.playersRankings.map((playersRanking) => {
+                {gameSession.sessionScores.map((playersRanking) => {
                   return playerDetails(
                     playersRanking.name,
-                    playersRanking.ranking
+                    playersRanking.score
                   );
                 })}
               </div>

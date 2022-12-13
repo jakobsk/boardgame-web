@@ -2,12 +2,12 @@ export type OnClickFunction = {
   onClick: (event: React.MouseEvent<HTMLElement>) => void;
 };
 
-type PlayerRanking = {
+type SessionScore = {
   name: string;
-  ranking: number;
+  score: number;
 };
 export type GameHistoryProps = {
   date: string;
   winner: string;
-  playersRankings: PlayerRanking[];
+  sessionScores: SessionScore[];
 };

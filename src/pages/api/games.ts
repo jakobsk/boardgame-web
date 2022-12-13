@@ -3,6 +3,16 @@
 import { BOARDGAME_API } from '../../constants/urls';
 import { GameType } from '../../models/game-type';
 
+export async function getTotalScores(game) {
+  const res = await fetch(`${BOARDGAME_API}/games/${game}/score`);
+  return res.json();
+}
+
+export async function getGameHistory(gameId) {
+  const res = await fetch(`${BOARDGAME_API}/gamesessions/history/${gameId}`);
+  return res.json();
+}
+
 export async function getGameData(game) {
   // const res = await fetch(`${BOARDGAME_API}/games/${game}`);
   // return res.json();
@@ -10,7 +20,7 @@ export async function getGameData(game) {
   let gameData;
 
   switch (game) {
-    case 'TerraformingMars':
+    case 'terraform':
       gameData = {
         rowData: [
           {
@@ -125,7 +135,7 @@ export async function getGameData(game) {
         ],
       };
 
-    case 'Poker':
+    case 'poker':
       gameData = {
         rowData: [
           {

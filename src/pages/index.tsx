@@ -3,15 +3,12 @@ import utilStyles from '../styles/Utils.module.css';
 import homeStyles from '../styles/Home.module.css';
 import Layout, { siteTitle } from '../components/layout';
 import Link from 'next/link';
-
 import { GetStaticProps } from 'next';
 import { getAllGamesTypes } from './api/games';
 import { toCamelCase } from '../utils/string-utils';
 import { GameType } from '../models/game-type';
 
-type GameTypesWithLink = GameType & { link: string };
-
-const Home = ({ gameTypes }: { gameTypes: GameTypesWithLink[] }) => {
+const Home = ({ gameTypes }: { gameTypes: GameType[] }) => {
   const imageDto = {
     path: '/images/frontpage_header.png',
     height: 313.5,
@@ -33,7 +30,7 @@ const Home = ({ gameTypes }: { gameTypes: GameTypesWithLink[] }) => {
         </section>
         <section className={homeStyles.grid}>
           {gameTypes.map((game) => (
-            <Link href={`/games/${game.link}`} key={game.id}>
+            <Link href={`/games/${game.slug}`} key={game.id}>
               <a className={homeStyles.card}>
                 <h2>{game.name}</h2>
               </a>
@@ -56,7 +53,7 @@ export const getStaticProps: GetStaticProps = async () => {
   console.log('HALLA: ', gameTypesWithLinks);
   return {
     props: {
-      gameTypesWithLinks,
+      gameTypes,
     },
   };
 };

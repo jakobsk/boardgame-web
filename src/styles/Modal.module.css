@@ -1,4 +1,12 @@
-.modal,
+.modal {
+  position: absolute;
+  z-index: 10;
+}
+.modalrelative {
+  position: relative;
+  top: 300px;
+  left: 150px;
+}
 .overlay {
   width: 100vw;
   height: 100vh;
@@ -21,15 +29,16 @@
 }
 
 .modalContent {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
+  width: max-content;
   transform: translate(-50%, -50%);
   line-height: 1.4;
   background: #f1f1f1;
-  padding: 50px 50px;
+  padding: 80px 60px;
   border-radius: 2rem;
-  max-width: 600px;
+  max-width: 900px;
   min-width: 300px;
 }
 

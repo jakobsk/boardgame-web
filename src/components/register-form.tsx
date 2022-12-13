@@ -21,6 +21,7 @@ function RankingForm({ toggleModal }: { toggleModal: noParamNoCallback }) {
 
   const onSubmit = (data) => {
     console.log(typeof data);
+    console.log('HEYEYE');
     toggleModal();
     console.log(data);
   };

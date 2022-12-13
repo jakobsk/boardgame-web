@@ -3,14 +3,14 @@ import GameHistory from '../../components/game-history';
 import Layout from '../../components/layout';
 import Modal from '../../components/register-game-modal';
 import RankingTable from '../../components/table';
-import { getAllGamesTypes, getGameData } from '../api/games';
+import { getAllGamesTypes, getGameHistory, getTotalScores } from '../api/games';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { toCamelCase } from '../../utils/string-utils';
+import styles from '../../styles/Modal.module.css';
 
-const Game = ({ gameData }) => {
+const Game = ({ totalScores, gameHistory }) => {
   // FIX: loose link between game data and image, should retrieve perhaps from backend
   const imageDto = {
-    path: `/images/${gameData.game}.png`,
+    path: `/images/${totalScores.game}.png`,
     height: 427,
     width: 614,
   };
@@ -23,21 +23,28 @@ const Game = ({ gameData }) => {
         </Head>
 
         <RankingTable
-          game={gameData.game}
-          rows={gameData.rowData}
+          game={totalScores.game}
+          rows={totalScores.rows}
         ></RankingTable>
-        <Modal></Modal>
-        <GameHistory gameHistory={gameData.gameHistory}></GameHistory>
+        <div className={`${styles.modalrelative}`}>
+          <Modal></Modal>
+        </div>
+        <GameHistory gameHistory={gameHistory}></GameHistory>
       </Layout>
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const gameData = await getGameData(params?.game);
+  const totalScores = await getTotalScores(params?.game);
+  const gameHistory = totalScores.length
+    ? await getGameHistory(parseInt(totalScores[0].gameId))
+    : [];
+  console;
   return {
     props: {
-      gameData,
+      totalScores: { rows: totalScores, game: params?.game },
+      gameHistory,
     },
     revalidate: 10,
   };
@@ -45,10 +52,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const gameTypes = await getAllGamesTypes();
-
   const paths = gameTypes.map((gameType) => {
     return {
-      params: { game: toCamelCase(gameType.name) },
+      params: { game: gameType.slug },
     };
   });
 
