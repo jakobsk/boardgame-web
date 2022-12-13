@@ -37,16 +37,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const totalScores = await getTotalScores(params?.game);
 
   //FIXME: This is a bit hacky, but we need to get the gameId from the first row
-  const gameId = totalScores[0].gameId;
-
-  const gameHistory = totalScores.length
-    ? await getGameHistory(parseInt(gameId))
-    : [];
+  const gameId = totalScores.gameId;
+  const gameHistory = await getGameHistory(parseInt(gameId));
   const allUsers = await getUsers();
 
   return {
     props: {
-      totalScores: { rows: totalScores, game: params?.game },
+      totalScores: { rows: totalScores.totalScores, game: params?.game },
       gameHistory,
       allUsers,
       gameId: gameId,

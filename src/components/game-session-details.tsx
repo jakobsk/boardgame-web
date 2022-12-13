@@ -40,7 +40,7 @@ export default function GameSessionDetails({
               <div>
                 {gameSession.sessionScores.map((playersRanking) => {
                   return playerDetails(
-                    playersRanking.name,
+                    playersRanking.userId,
                     playersRanking.score
                   );
                 })}

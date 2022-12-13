@@ -3,7 +3,7 @@ export type OnClickFunction = {
 };
 
 type SessionScore = {
-  name: string;
+  userId: number;
   score: number;
 };
 export type GameHistoryProps = {

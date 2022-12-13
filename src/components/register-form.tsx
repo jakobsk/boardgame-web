@@ -15,15 +15,17 @@ const maxPlayers = 6;
 const mapToDto = (data, gameId: number) => {
   // kind of weird, but the last character of the key is the index of the player
   // so we can use that to create the array of players
+  console.log('data', data);
   const userSessionScores = Object.keys(data)
-    .filter((key) => key.startsWith('name'))
+    .filter((key) => key.startsWith('id'))
     .map((key) => {
       const index = key[key.length - 1];
       return {
-        name: data[key],
+        userId: data[key],
         score: data[`rank${index}`],
       };
     });
+  console.log(userSessionScores);
 
   return { gameId, userSessionScores };
 };
@@ -77,6 +79,7 @@ function RankingForm({
       <form onSubmit={handleSubmit(onSubmit)}>
         {inputFields.map((_, index) => {
           const elementName = `name${index}`;
+          const elementId = `id${index}`;
           const elementRank = `rank${index}`;
           return (
             <>
@@ -84,7 +87,11 @@ function RankingForm({
                 <label htmlFor={elementName} className={styles.playerNumber}>
                   Spiller {index + 1}:
                 </label>
-                <PlayerDropdown users={users}></PlayerDropdown>
+                <PlayerDropdown
+                  register={register}
+                  users={users}
+                  elementId={elementId}
+                ></PlayerDropdown>
                 <input
                   type="number"
                   id={elementRank}
