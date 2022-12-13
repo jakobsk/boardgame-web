@@ -11,3 +11,8 @@ export type GameHistoryProps = {
   winner: string;
   sessionScores: SessionScore[];
 };
+
+export type GameSessionData = {
+  gameId: number;
+  userSessionScores: SessionScore[];
+};

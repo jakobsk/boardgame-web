@@ -8,7 +8,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import styles from '../../styles/Modal.module.css';
 import { getUsers } from '../api/users';
 
-const Game = ({ totalScores, gameHistory, allUsers }) => {
+const Game = ({ totalScores, gameHistory, allUsers, gameId }) => {
   // FIX: loose link between game data and image, should retrieve perhaps from backend
   const imageDto = {
     path: `/images/${totalScores.game}.png`,
@@ -23,14 +23,11 @@ const Game = ({ totalScores, gameHistory, allUsers }) => {
           <title>Terraforming Mars</title>
         </Head>
 
-        <RankingTable
-          game={totalScores.game}
-          rows={totalScores.rows}
-        ></RankingTable>
+        <RankingTable game={totalScores.game} rows={totalScores.rows} />
         <div className={`${styles.modalrelative}`}>
-          <Modal users={allUsers}></Modal>
+          <Modal users={allUsers} gameId={gameId} />
         </div>
-        <GameHistory gameHistory={gameHistory}></GameHistory>
+        <GameHistory gameHistory={gameHistory} />
       </Layout>
     </>
   );
@@ -38,16 +35,21 @@ const Game = ({ totalScores, gameHistory, allUsers }) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const totalScores = await getTotalScores(params?.game);
+
+  //FIXME: This is a bit hacky, but we need to get the gameId from the first row
+  const gameId = totalScores[0].gameId;
+
   const gameHistory = totalScores.length
-    ? await getGameHistory(parseInt(totalScores[0].gameId))
+    ? await getGameHistory(parseInt(gameId))
     : [];
   const allUsers = await getUsers();
-  console.log('HALLA: ', allUsers);
+
   return {
     props: {
       totalScores: { rows: totalScores, game: params?.game },
       gameHistory,
       allUsers,
+      gameId: gameId,
     },
     revalidate: 10,
   };

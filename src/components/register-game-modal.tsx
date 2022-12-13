@@ -3,7 +3,7 @@ import styles from '../styles/Modal.module.css';
 import RankingForm from './register-form';
 import Button from 'react-bootstrap/Button';
 
-export default function Modal({ users }) {
+export default function Modal({ users, gameId }) {
   const [modal, setModal] = useState(false);
 
   const toggleModal = (): void => {
@@ -30,7 +30,11 @@ export default function Modal({ users }) {
           <div onClick={toggleModal} className={styles.overlay}></div>
           <div className={styles.modalContent}>
             <h2>Registrer spill</h2>
-            <RankingForm users={users} toggleModal={toggleModal}></RankingForm>
+            <RankingForm
+              users={users}
+              gameId={gameId}
+              toggleModal={toggleModal}
+            />
             <Button
               variant="dark"
               className={styles.closeModal}

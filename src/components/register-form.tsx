@@ -6,17 +6,36 @@ import Button from 'react-bootstrap/Button';
 import { noParamNoCallback } from '../types/function-types';
 import PlayerDropdown from './player-dropdown';
 import { User } from '../models/user';
+import { registerGame } from '../pages/api/games';
 
 //TODO: This number should be fetched from backend maybe since every game has different allowed players
 
 const maxPlayers = 6;
 
+const mapToDto = (data, gameId: number) => {
+  // kind of weird, but the last character of the key is the index of the player
+  // so we can use that to create the array of players
+  const userSessionScores = Object.keys(data)
+    .filter((key) => key.startsWith('name'))
+    .map((key) => {
+      const index = key[key.length - 1];
+      return {
+        name: data[key],
+        score: data[`rank${index}`],
+      };
+    });
+
+  return { gameId, userSessionScores };
+};
+
 function RankingForm({
   toggleModal,
   users,
+  gameId,
 }: {
   users: User;
   toggleModal: noParamNoCallback;
+  gameId: number;
 }) {
   const {
     register,
@@ -27,10 +46,10 @@ function RankingForm({
   const [inputFields, setInputFields] = useState([{}]);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log(typeof data);
+  const onSubmit = async (data) => {
     toggleModal();
-    console.log(data);
+    const dto = mapToDto(data, gameId);
+    await registerGame(dto);
   };
 
   const removePlayer = () => {
