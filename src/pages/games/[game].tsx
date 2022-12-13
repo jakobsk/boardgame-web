@@ -6,8 +6,9 @@ import RankingTable from '../../components/table';
 import { getAllGamesTypes, getGameHistory, getTotalScores } from '../api/games';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import styles from '../../styles/Modal.module.css';
+import { getUsers } from '../api/users';
 
-const Game = ({ totalScores, gameHistory }) => {
+const Game = ({ totalScores, gameHistory, allUsers }) => {
   // FIX: loose link between game data and image, should retrieve perhaps from backend
   const imageDto = {
     path: `/images/${totalScores.game}.png`,
@@ -27,7 +28,7 @@ const Game = ({ totalScores, gameHistory }) => {
           rows={totalScores.rows}
         ></RankingTable>
         <div className={`${styles.modalrelative}`}>
-          <Modal></Modal>
+          <Modal users={allUsers}></Modal>
         </div>
         <GameHistory gameHistory={gameHistory}></GameHistory>
       </Layout>
@@ -40,11 +41,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const gameHistory = totalScores.length
     ? await getGameHistory(parseInt(totalScores[0].gameId))
     : [];
-  console;
+  const allUsers = await getUsers();
+  console.log('HALLA: ', allUsers);
   return {
     props: {
       totalScores: { rows: totalScores, game: params?.game },
       gameHistory,
+      allUsers,
     },
     revalidate: 10,
   };

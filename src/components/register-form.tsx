@@ -4,12 +4,20 @@ import { useForm } from 'react-hook-form';
 import styles from '../styles/RegisterForm.module.css';
 import Button from 'react-bootstrap/Button';
 import { noParamNoCallback } from '../types/function-types';
+import PlayerDropdown from './player-dropdown';
+import { User } from '../models/user';
 
 //TODO: This number should be fetched from backend maybe since every game has different allowed players
 
 const maxPlayers = 6;
 
-function RankingForm({ toggleModal }: { toggleModal: noParamNoCallback }) {
+function RankingForm({
+  toggleModal,
+  users,
+}: {
+  users: User;
+  toggleModal: noParamNoCallback;
+}) {
   const {
     register,
     handleSubmit,
@@ -21,7 +29,6 @@ function RankingForm({ toggleModal }: { toggleModal: noParamNoCallback }) {
 
   const onSubmit = (data) => {
     console.log(typeof data);
-    console.log('HEYEYE');
     toggleModal();
     console.log(data);
   };
@@ -58,13 +65,7 @@ function RankingForm({ toggleModal }: { toggleModal: noParamNoCallback }) {
                 <label htmlFor={elementName} className={styles.playerNumber}>
                   Spiller {index + 1}:
                 </label>
-                <input
-                  type="text"
-                  id={elementName}
-                  placeholder="Navn på spiller"
-                  {...register(elementName, { required: 'Påkrevd' })}
-                  className={styles.formInput}
-                />
+                <PlayerDropdown users={users}></PlayerDropdown>
                 <input
                   type="number"
                   id={elementRank}
